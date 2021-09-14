@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/engam/AndroidStudioProjects/Ecommercie_1/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/engam/AndroidStudioProjects/Ecommercie_1/app/src/main/res/layout/fragment_liat.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/engam/AndroidStudioProjects/Ecommercie_1/app/src/main/res/layout/fragment_list.xml" value="0.1" />
+        <entry key="..\:/Users/engam/AndroidStudioProjects/Ecommercie_1/app/src/main/res/layout/view_holder_favorite_card.xml" value="0.1" />
       </map>
     </option>
   </component>

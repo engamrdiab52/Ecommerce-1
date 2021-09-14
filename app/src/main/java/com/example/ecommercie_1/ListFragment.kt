@@ -7,44 +7,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.example.ecommercie_1.MainActivity.Companion.TAG
 import com.example.ecommercie_1.databinding.FragmentListBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+
 
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private val database = Firebase.database
-    val myReference = database.getReference("user_1")
-    var mutableList: MutableList<FavoriteOrder> = mutableListOf()
+    private val favoriteListEpoxyController by lazy {
+        FavoriteListEpoxyController()
+    }
+    private lateinit var recyclerView: EpoxyRecyclerView
+    private val viewModel: FavoriteListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_list, container, false)
-        myReference.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                //    val value = snapshot.getValue(FavoriteOrder::class.java)
-                snapshot.children.forEach {
-                    val value = snapshot.getValue(FavoriteOrder::class.java)
-                    value?.let { it1 -> mutableList.add(it1) }
-                    Log.d(TAG, it.value.toString())
-                }
-                Log.d(TAG, mutableList.toString())
-            }
+        recyclerView = binding.recyclerView
+        recyclerView.adapter = favoriteListEpoxyController.adapter
 
-            override fun onCancelled(error: DatabaseError) {
-                Log.d(TAG, error.message)
-            }
 
+        viewModel.favoriteOrder.observe(viewLifecycleOwner, Observer {
+            favoriteListEpoxyController.setData(it)
+            Log.d(TAG, it.toString())
         })
+        viewModel.startDownload()
 
         return binding.root
     }
+
 
 }
