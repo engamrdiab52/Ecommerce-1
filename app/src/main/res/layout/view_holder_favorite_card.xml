@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.ecommercie_1.FavoriteListViewModel" />
+
         <variable
             name="favoriteOrder"
             type="com.example.ecommercie_1.FavoriteOrder" />
@@ -11,7 +16,14 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:padding="8dp"
+        app:cardCornerRadius="3dp"
+        app:cardElevation="1dp"
+        app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,19 +33,26 @@
             <ImageView
                 android:id="@+id/img_card_favorit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
+                android:padding="8dp"
+                android:scaleType="fitCenter"
+                app:imageUrl="@{favoriteOrder.url_product}"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/txt_view_price_card_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:gravity="center"
                 android:text="@{favoriteOrder.price_product}" />
 
             <TextView
                 android:id="@+id/txt_view_name_card_favorite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:gravity="center"
                 android:text="@{favoriteOrder.name_product}" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
